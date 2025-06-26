@@ -11,6 +11,7 @@ interface LoginWizardRegisterStepProps {
 
 function LoginWizardRegisterStep({ onRegister }: LoginWizardRegisterStepProps) {
   const { previousStep, handleStep } = useWizard();
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [registerData, setRegisterData] = useState<RegisterData>({
     username: "",
     password: "",
@@ -27,15 +28,45 @@ function LoginWizardRegisterStep({ onRegister }: LoginWizardRegisterStepProps) {
       ...prev,
       [name]: value,
     }));
+
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: { [key: string]: string } = {};
+
+    if (!registerData.username.trim()) {
+      newErrors.username = "Username is required.";
+    }
+
+    if (!registerData.password.trim()) {
+      newErrors.password = "Password is required.";
+    }
+
+    if (!registerData.email.trim()) {
+      newErrors.email = "Email is required.";
+    } else if (!/\S+@\S+\.\S+/.test(registerData.email)) {
+      newErrors.email = "Email format is invalid.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = () => {
-    onRegister();
+    if (validateForm()) {
+      onRegister();
+    }
   };
 
   return (
     <LoginWizardContentContainer>
-      <h4 className={Styles.textCenter}>Register</h4>
+      <h4 className={`${Styles.textCenter} ${Styles.titleText}`}>Register</h4>
       <div className={Styles.inputSection}>
         <input
           name="username"
@@ -46,6 +77,9 @@ function LoginWizardRegisterStep({ onRegister }: LoginWizardRegisterStepProps) {
           type="text"
           required
         />
+        {errors.username && (
+          <span className={Styles.errorText}>{errors.username}</span>
+        )}
         <input
           name="password"
           value={registerData.password}
@@ -55,6 +89,9 @@ function LoginWizardRegisterStep({ onRegister }: LoginWizardRegisterStepProps) {
           type="password"
           required
         />
+        {errors.password && (
+          <span className={Styles.errorText}>{errors.password}</span>
+        )}
         <input
           name="email"
           value={registerData.email}
@@ -64,6 +101,9 @@ function LoginWizardRegisterStep({ onRegister }: LoginWizardRegisterStepProps) {
           type="email"
           required
         />
+        {errors.email && (
+          <span className={Styles.errorText}>{errors.email}</span>
+        )}
       </div>
       <div className={Styles.twoButtonContainer}>
         <button onClick={previousStep} className={Styles.loginButton}>

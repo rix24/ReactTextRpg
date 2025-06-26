@@ -2,8 +2,11 @@ import { Wizard } from "react-use-wizard";
 import LoginWizardLoginStep from "./LoginWizardLoginStep";
 import LoginWizardRegisterStep from "./LoginWizardRegisterStep";
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LoginWizard() {
+  const navigate = useNavigate();
+
   const HandleLogin = useCallback(() => {
     console.log("Login button clicked");
     // Placeholder for actual login logic
@@ -11,6 +14,7 @@ function LoginWizard() {
     //assume login goes smoothly
 
     //navigate to main game page
+    navigate("/ReactTextRpg/Game");
   }, []);
 
   const HandleRegister = useCallback(() => {

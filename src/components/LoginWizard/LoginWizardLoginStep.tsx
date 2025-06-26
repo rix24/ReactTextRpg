@@ -1,6 +1,5 @@
 import { useState, type ChangeEvent } from "react";
 import { useWizard } from "react-use-wizard";
-import { useNavigate } from "react-router-dom";
 import LoginWizardContentContainer from "./LoginWizardContentContainer";
 import Styles from "./Styling/LoginWizardStyles.module.css";
 import type { LoginData } from "./LoginWizardInterfaces";
@@ -20,7 +19,6 @@ function LoginWizardLoginStep({
     username: "",
     password: "",
   });
-  const navigate = useNavigate();
 
   handleStep(() => {
     console.log("Step change");
@@ -38,15 +36,9 @@ function LoginWizardLoginStep({
     onLogin();
   };
 
-  const handleNavigation = () => {
-    console.log("Navigating to main game page");
-
-    navigate("/ReactTextRpg/Game");
-  };
-
   return (
     <LoginWizardContentContainer>
-      <h4 className={Styles.textCenter}>Login</h4>
+      <h4 className={`${Styles.textCenter} ${Styles.titleText}`}>Login</h4>
       <div className={Styles.inputSection}>
         <input
           name="username"
@@ -76,9 +68,6 @@ function LoginWizardLoginStep({
         </button>
         <button onClick={handleSubmit} className={Styles.loginButton}>
           Login
-        </button>
-        <button onClick={handleNavigation} className={Styles.loginButton}>
-          Game
         </button>
       </div>
     </LoginWizardContentContainer>
