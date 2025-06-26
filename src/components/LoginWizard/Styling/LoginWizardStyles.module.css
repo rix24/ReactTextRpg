@@ -1,0 +1,71 @@
+.contentBorder {
+    width: 70%;
+    height: 300px;
+    border: solid 1px rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    margin-left: 15%;
+    margin-right: 15%;
+    max-width: 400px;
+}
+
+.contentContainer {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.inputSection {    
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+}
+
+.inputContainer {
+    text-align: center;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 10px;
+}
+
+.inputContainer::placeholder {
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
+.inputContainer:focus::placeholder {
+    opacity: 0;
+}
+
+.twoButtonContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    justify-content: center;
+    margin-top: auto;
+}
+
+.loginButton {
+    width: 100px;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+.forgotPassword {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.forgotPassword:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    text-align: center;
+    font-size: 12px;
+}

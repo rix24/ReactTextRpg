@@ -1,0 +1,10 @@
+.fade-in-text-line {
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    text-align: center;
+}
+
+.fade-in-text-line.visible {
+    opacity: 1;
+    text-align: center;
+}

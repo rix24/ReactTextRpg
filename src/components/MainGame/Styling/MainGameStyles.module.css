@@ -1,0 +1,10 @@
+.gameBorder {
+    border: solid 1px rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    width: 96vw;
+    height: 90vh;
+}
+
+.textCenter {
+    text-align: center;
+}   
