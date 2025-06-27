@@ -1,20 +1,55 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment, createElement, Children } from "react";
 import "./Styling/FadeInTextStyles.css";
+import React from "react";
 
 interface FadeInTextProps {
   children: React.ReactNode;
   delay?: number;
-  lineDelay?: number;
+  paragraphDelay?: number;
   gradual?: boolean;
 }
 
 function FadeInText({
   children,
   delay = 0,
-  lineDelay = 200,
+  paragraphDelay = 200,
   gradual = false,
 }: FadeInTextProps) {
   const [visibleLines, setVisibleLines] = useState<number[]>([]);
+
+  const parseContentIntoLines = (node: React.ReactNode): React.ReactNode[] => {
+    const lines: React.ReactNode[] = [];
+    let currentLine: React.ReactNode[] = [];
+
+    const processNode = (node: React.ReactNode) => {
+      if (typeof node === "string") {
+        const textLines = node.split('\n');
+        textLines.forEach((textLine, index) => {
+          if (index > 0) {
+            lines.push(currentLine.length === 1 ? currentLine[0] : createElement(Fragment, {}, ...currentLine));
+            currentLine = [];
+          }
+          if (textLine.trim() || currentLine.length > 0) {
+            currentLine.push(textLine);
+          }
+        });
+      } else if (React.isValidElement(node)) {
+        currentLine.push(node);
+      } else if (Array.isArray(node)) {
+        node.forEach(processNode);
+      }
+    };
+
+    Children.forEach(children, processNode);
+
+    if (currentLine.length > 0) {
+      lines.push(currentLine.length === 1 ? currentLine[0] : createElement(Fragment, {}, ...currentLine));
+    }
+
+    return lines;
+  }
+
+  const lines = parseContentIntoLines(children);
 
   useEffect(() => {
     if (!gradual) {
@@ -25,32 +60,26 @@ function FadeInText({
       return () => clearTimeout(timer);
     }
 
-    const text = typeof children === "string" ? children : "";
-    const lines = text.split("\n");
     const timers: NodeJS.Timeout[] = [];
-
     lines.forEach((_, index) => {
       const timer = setTimeout(() => {
         setVisibleLines((prev) => [...prev, index]);
-      }, delay + index * lineDelay);
+      }, delay + index * paragraphDelay);
       timers.push(timer);
     });
-
+    
     return () => {
       timers.forEach((timer) => clearTimeout(timer));
     };
-  }, [children, delay, lineDelay, gradual]);
+  }, [children, delay, paragraphDelay, gradual]);
 
   if (!gradual) {
     return (
-      <span className={`fade-in ${visibleLines.length > 0 ? "visible" : ""}`}>
+      <div className={`fade-in ${visibleLines.length > 0 ? "visible" : ""}`}>
         {children}
-      </span>
+      </div>
     );
-  }
-
-  const text = typeof children === "string" ? children : "";
-  const lines = text.split("\n");
+  }  
 
   return (
     <div>
