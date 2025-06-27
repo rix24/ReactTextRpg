@@ -6,7 +6,7 @@ import Styles from "./Styling/LoginWizardStyles.module.css";
 
 interface LoginWizardRegisterStepProps {
   //will need to return actal login data at some point
-  onRegister: () => void;
+  onRegister: (registerData: RegisterData) => Promise<void>;
 }
 
 function LoginWizardRegisterStep({ onRegister }: LoginWizardRegisterStepProps) {
@@ -58,9 +58,9 @@ function LoginWizardRegisterStep({ onRegister }: LoginWizardRegisterStepProps) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validateForm()) {
-      onRegister();
+      await onRegister(registerData);
     }
   };
 

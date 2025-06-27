@@ -65,6 +65,12 @@
     text-decoration: underline;
 }
 
+.errorText {
+    font-size: 10px;
+    text-align: center;
+    margin-top: 5px;
+}
+
 .forgotPassword {
     text-align: center;
     font-size: 12px;

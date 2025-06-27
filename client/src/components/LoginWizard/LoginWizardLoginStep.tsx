@@ -6,7 +6,7 @@ import type { LoginData } from "./LoginWizardInterfaces";
 
 interface LoginWizardLoginStepProps {
   //will need to return actal login data at some point
-  onLogin: () => void;
+  onLogin: (loginData: LoginData) => Promise<void>;
   onForgotPassword: () => void;
 }
 
@@ -20,9 +20,7 @@ function LoginWizardLoginStep({
     password: "",
   });
 
-  handleStep(() => {
-    console.log("Step change");
-  });
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -30,10 +28,38 @@ function LoginWizardLoginStep({
       ...prev,
       [name]: value,
     }));
+
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+    }
   };
 
-  const handleSubmit = () => {
-    onLogin();
+  const validateForm = (): boolean => {
+    console.log("Validating form");
+    const newErrors: { [key: string]: string } = {};
+
+    if (!loginData.username.trim()) {
+      newErrors.username = "Username is required";
+    }
+
+    if (!loginData.password.trim()) {
+      newErrors.password = "Password is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+
+    console.log(errors);
+  };
+
+  const handleSubmit = async () => {
+    if (validateForm()) {
+      await onLogin(loginData);
+    }
   };
 
   return (
@@ -49,6 +75,9 @@ function LoginWizardLoginStep({
           type="text"
           required
         />
+        {errors.username && (
+          <span className={Styles.errorText}>{errors.username}</span>
+        )}
         <input
           name="password"
           value={loginData.password}
@@ -58,6 +87,9 @@ function LoginWizardLoginStep({
           type="password"
           required
         />
+        {errors.password && (
+          <span className={Styles.errorText}>{errors.password}</span>
+        )}
         <span className={Styles.forgotPassword} onClick={onForgotPassword}>
           Forgot Password
         </span>
