@@ -2,7 +2,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Force Development environment
+// Force Development environment, will need to change this eventually and figure out how to handle different environments
 builder.Environment.EnvironmentName = "Development";
 
 // Add services to the container.
