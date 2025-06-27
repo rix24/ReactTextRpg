@@ -47,12 +47,11 @@ namespace ReactTextRpgApi.Controllers{
             }
 
             // Placeholder logic - replace with actual registration
-            return Ok(new { 
+            return Ok(new
+            {
                 message = "Registration successful",
                 user = new { username = request.Username, email = request.Email }
             });
-
-            return Ok(new { message = "Registration successful", user = new { username = request.Username, email = request.Email } });
-        }
+        }         
     }    
 }
