@@ -1,4 +1,4 @@
-import FadeInText from "../commonComponents/FadeInText";
+import FadeInText from "../commonComponents/FadeInText/FadeInText";
 import LoginWizard from "../components/LoginWizard/LoginWizard";
 
 function LoginPage() {
