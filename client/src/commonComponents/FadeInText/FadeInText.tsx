@@ -7,6 +7,7 @@ interface FadeInTextProps {
   delay?: number;
   paragraphDelay?: number;
   gradual?: boolean;
+  onComplete?: () => void;
 }
 
 function FadeInText({
@@ -14,12 +15,14 @@ function FadeInText({
   delay = 0,
   paragraphDelay = 200,
   gradual = false,
+  onComplete,
 }: FadeInTextProps) {
   const [visibleLines, setVisibleLines] = useState<number[]>([]);
+  const finalLineDelay = 3000;
 
   const parseContentIntoLines = (): React.ReactNode[] => {
     const lines: React.ReactNode[] = [];
-    let currentLine: React.ReactNode[] = [];
+    let currentLine: React.ReactNode[] = [];    
 
     const processNode = (node: React.ReactNode) => {
       if (typeof node === "string") {
@@ -55,6 +58,9 @@ function FadeInText({
     if (!gradual) {
       const timer = setTimeout(() => {
         setVisibleLines([0]);
+        setTimeout(() => {
+                onComplete?.();
+            }, finalLineDelay); 
       }, delay);
 
       return () => clearTimeout(timer);
@@ -63,7 +69,16 @@ function FadeInText({
     const timers: NodeJS.Timeout[] = [];
     lines.forEach((_, index) => {
       const timer = setTimeout(() => {
-        setVisibleLines((prev) => [...prev, index]);
+        setVisibleLines((prev) => {
+          const newVisible = [...prev, index];
+          // Check if this is the last line
+          if (newVisible.length === lines.length) {
+            setTimeout(() => {
+                onComplete?.();
+            }, finalLineDelay);
+          }
+          return newVisible;
+        });
       }, delay + index * paragraphDelay);
       timers.push(timer);
     });

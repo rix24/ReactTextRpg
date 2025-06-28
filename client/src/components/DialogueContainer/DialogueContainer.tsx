@@ -5,9 +5,10 @@ import { getAllKeywords } from "../../commonComponents/LinkText/InfoDatabase";
 
 interface DialogueContainerProps {
     text: string;
+    onComplete: () => void;
 }
 
-function DialogueContainer({ text }: DialogueContainerProps) {
+function DialogueContainer({ text, onComplete }: DialogueContainerProps) {
     const [modalVisible, setModalVisible] = useState(false);
     const [linkText, setLinkText] = useState(""); //In the future, link text should probably accept a topic prop, and contain a function that searches a hardcoded database to retrieve the text relevant to that topic, return it and set it in the modal component
     
@@ -101,11 +102,11 @@ function DialogueContainer({ text }: DialogueContainerProps) {
 
     return (
         <>{!modalVisible ? (
-            <FadeInText delay={delay} paragraphDelay={lineDelay} gradual={gradual}>
+            <FadeInText delay={delay} paragraphDelay={lineDelay} gradual={gradual} onComplete={onComplete}>
                 {textParsedForKeywords}
             </FadeInText>           
       ) : (
-        <FadeInText delay={delay} paragraphDelay={lineDelay} gradual={gradual}>{linkText}</FadeInText>
+        <FadeInText delay={delay} paragraphDelay={lineDelay} gradual={gradual} onComplete={onComplete}>{linkText}</FadeInText>
       )}</>
     )
 }
