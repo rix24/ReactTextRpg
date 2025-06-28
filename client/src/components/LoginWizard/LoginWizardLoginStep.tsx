@@ -8,13 +8,15 @@ interface LoginWizardLoginStepProps {
   //will need to return actal login data at some point
   onLogin: (loginData: LoginData) => Promise<void>;
   onForgotPassword: () => void;
+  error: string;
 }
 
 function LoginWizardLoginStep({
   onLogin,
   onForgotPassword,
+  error,
 }: LoginWizardLoginStepProps) {
-  const { nextStep, handleStep } = useWizard();
+  const { nextStep } = useWizard();
   const [loginData, setLoginData] = useState<LoginData>({
     username: "",
     password: "",
@@ -39,7 +41,6 @@ function LoginWizardLoginStep({
   };
 
   const validateForm = (): boolean => {
-    console.log("Validating form");
     const newErrors: { [key: string]: string } = {};
 
     if (!loginData.username.trim()) {
@@ -52,8 +53,6 @@ function LoginWizardLoginStep({
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-
-    console.log(errors);
   };
 
   const handleSubmit = async () => {
@@ -93,6 +92,9 @@ function LoginWizardLoginStep({
         <span className={Styles.forgotPassword} onClick={onForgotPassword}>
           Forgot Password
         </span>
+        {error !== "" && (
+          <span className={Styles.errorText}>{error}</span>
+        )}
       </div>
       <div className={Styles.twoButtonContainer}>
         <button onClick={nextStep} className={Styles.loginButton}>

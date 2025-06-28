@@ -1,0 +1,41 @@
+.responseContainer {
+    margin: 5px;
+    margin-top: auto;    
+    border: solid 1px rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    height: 170px;
+    padding: 0 8px 0 0;
+    overflow: hidden;
+}
+
+.responseContainerInner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: rgba(255, 255, 255, 0.8) transparent;
+}
+
+.responseFirstOption {
+    margin-left: 10px;
+    margin-right: 5px;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.responseFirstOption:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.responseOption {
+    margin-left: 10px;
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+.responseOption:hover {
+    cursor: pointer;
+    color: white;
+}

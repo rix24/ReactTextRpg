@@ -3,6 +3,8 @@
     border-radius: 20px;
     width: 94vw;
     height: 90vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .titleTextCenter {

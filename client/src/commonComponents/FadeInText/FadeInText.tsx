@@ -17,7 +17,7 @@ function FadeInText({
 }: FadeInTextProps) {
   const [visibleLines, setVisibleLines] = useState<number[]>([]);
 
-  const parseContentIntoLines = (node: React.ReactNode): React.ReactNode[] => {
+  const parseContentIntoLines = (): React.ReactNode[] => {
     const lines: React.ReactNode[] = [];
     let currentLine: React.ReactNode[] = [];
 
@@ -49,7 +49,7 @@ function FadeInText({
     return lines;
   }
 
-  const lines = parseContentIntoLines(children);
+  const lines = parseContentIntoLines();
 
   useEffect(() => {
     if (!gradual) {

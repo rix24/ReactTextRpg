@@ -3,13 +3,15 @@ import LoginWizardContentContainer from "./LoginWizardContentContainer";
 import type { RegisterData } from "./LoginWizardInterfaces";
 import { useState, type ChangeEvent } from "react";
 import Styles from "./Styling/LoginWizardStyles.module.css";
+import { error } from "console";
 
 interface LoginWizardRegisterStepProps {
   //will need to return actal login data at some point
   onRegister: (registerData: RegisterData) => Promise<void>;
+  error: string;
 }
 
-function LoginWizardRegisterStep({ onRegister }: LoginWizardRegisterStepProps) {
+function LoginWizardRegisterStep({ onRegister, error }: LoginWizardRegisterStepProps) {
   const { previousStep, handleStep } = useWizard();
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [registerData, setRegisterData] = useState<RegisterData>({
@@ -19,7 +21,7 @@ function LoginWizardRegisterStep({ onRegister }: LoginWizardRegisterStepProps) {
   });
 
   handleStep(() => {
-    console.log("Step change");
+
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -103,6 +105,9 @@ function LoginWizardRegisterStep({ onRegister }: LoginWizardRegisterStepProps) {
         />
         {errors.email && (
           <span className={Styles.errorText}>{errors.email}</span>
+        )}
+        {error !== "" && (
+          <span className={Styles.errorText}>{error}</span>
         )}
       </div>
       <div className={Styles.twoButtonContainer}>

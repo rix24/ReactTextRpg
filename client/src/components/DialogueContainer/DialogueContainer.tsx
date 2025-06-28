@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
 import LinkText from "../../commonComponents/LinkText/LinkText";
 import FadeInText from "../../commonComponents/FadeInText/FadeInText";
-import { getAllKeywords, isValidKeyword } from "../../commonComponents/LinkText/InfoDatabase";
+import { getAllKeywords } from "../../commonComponents/LinkText/InfoDatabase";
 
 interface DialogueContainerProps {
     text: string;
@@ -75,7 +75,6 @@ function DialogueContainer({ text }: DialogueContainerProps) {
                     const match = remainingText.match(keywordRegex);
 
                     if (match && match.index === 0) {
-                        console.log(`Keyword found: ${keyword}`);
                         usedKeywords.add(keyword);
                         
                         result.push(
