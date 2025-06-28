@@ -9,20 +9,27 @@ interface LoginWizardLoginStepProps {
   onLogin: (loginData: LoginData) => Promise<void>;
   onForgotPassword: () => void;
   error: string;
+  onClearError: () => void;
 }
 
 function LoginWizardLoginStep({
   onLogin,
   onForgotPassword,
   error,
+  onClearError,
 }: LoginWizardLoginStepProps) {
   const { nextStep } = useWizard();
   const [loginData, setLoginData] = useState<LoginData>({
     username: "",
     password: "",
   });
-
+  
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  
+  const registerStep = () => {
+    onClearError();
+    nextStep();
+  };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -97,7 +104,7 @@ function LoginWizardLoginStep({
         )}
       </div>
       <div className={Styles.twoButtonContainer}>
-        <button onClick={nextStep} className={Styles.loginButton}>
+        <button onClick={registerStep} className={Styles.loginButton}>
           Register
         </button>
         <button onClick={handleSubmit} className={Styles.loginButton}>

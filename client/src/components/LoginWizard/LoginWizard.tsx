@@ -44,6 +44,11 @@ function LoginWizard() {
     [navigate]
   );
 
+  const clearError = useCallback(() => {
+    setError("");
+  }, []);
+  
+
   const HandleRegister = useCallback(
     async (registerData: RegisterData) => {
       try {
@@ -86,8 +91,9 @@ function LoginWizard() {
           onLogin={HandleLogin}
           onForgotPassword={HandleForgotPassword}
           error={error}
+          onClearError={clearError}
         />
-        <LoginWizardRegisterStep onRegister={HandleRegister} error={error}/>
+        <LoginWizardRegisterStep onRegister={HandleRegister} error={error} onClearError={clearError}/>
       </Wizard>  
     </>
   );

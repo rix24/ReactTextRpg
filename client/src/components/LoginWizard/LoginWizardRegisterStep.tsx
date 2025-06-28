@@ -3,15 +3,15 @@ import LoginWizardContentContainer from "./LoginWizardContentContainer";
 import type { RegisterData } from "./LoginWizardInterfaces";
 import { useState, type ChangeEvent } from "react";
 import Styles from "./Styling/LoginWizardStyles.module.css";
-import { error } from "console";
 
 interface LoginWizardRegisterStepProps {
   //will need to return actal login data at some point
   onRegister: (registerData: RegisterData) => Promise<void>;
   error: string;
+  onClearError: () => void;
 }
 
-function LoginWizardRegisterStep({ onRegister, error }: LoginWizardRegisterStepProps) {
+function LoginWizardRegisterStep({ onRegister, error, onClearError }: LoginWizardRegisterStepProps) {
   const { previousStep, handleStep } = useWizard();
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [registerData, setRegisterData] = useState<RegisterData>({
@@ -21,8 +21,13 @@ function LoginWizardRegisterStep({ onRegister, error }: LoginWizardRegisterStepP
   });
 
   handleStep(() => {
-
+    
   });
+
+  const loginStep = () => {
+    onClearError();
+    previousStep();
+  };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -111,7 +116,7 @@ function LoginWizardRegisterStep({ onRegister, error }: LoginWizardRegisterStepP
         )}
       </div>
       <div className={Styles.twoButtonContainer}>
-        <button onClick={previousStep} className={Styles.loginButton}>
+        <button onClick={loginStep} className={Styles.loginButton}>
           Back
         </button>
         <button onClick={handleSubmit} className={Styles.loginButton}>
