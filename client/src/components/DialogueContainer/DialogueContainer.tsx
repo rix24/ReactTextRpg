@@ -11,14 +11,20 @@ interface DialogueContainerProps {
 function DialogueContainer({ text, onComplete }: DialogueContainerProps) {
     const [modalVisible, setModalVisible] = useState(false);
     const [linkText, setLinkText] = useState(""); //In the future, link text should probably accept a topic prop, and contain a function that searches a hardcoded database to retrieve the text relevant to that topic, return it and set it in the modal component
-    
+    const [canRespond, setCanRespond] = useState(false);
+
     //constants for fade in settings
     const [linkClicked, setLinkClicked] = useState(false);
     const [delay, setDelay] = useState(1000);
     const [lineDelay, setLineDelay] = useState(1000);
     const [gradual, setGradual] = useState(true);    
     
-    //useEffect on the firstLinkClick to control the settings for the fade in text
+    const handleComplete = useCallback(() => {
+        console.log("Fade in complete");
+        onComplete();
+        setCanRespond(true);
+    }, [])
+
     useEffect(() => {
         if (!linkClicked) {
             return;
@@ -59,7 +65,7 @@ function DialogueContainer({ text, onComplete }: DialogueContainerProps) {
     
     }, [handleEscapeKey]);
     //end of temp event listener code
-
+    
     const textParsedForKeywords = useMemo(() => {
         let remainingText = text;
         const result: React.ReactNode[] = [];
@@ -79,7 +85,7 @@ function DialogueContainer({ text, onComplete }: DialogueContainerProps) {
                         usedKeywords.add(keyword);
                         
                         result.push(
-                            <LinkText key={`link-${keyIndex++}`} onClick={handleLinkClick}>
+                            <LinkText key={`link-${keyIndex++}`} onClick={handleLinkClick} canRespond={canRespond}>
                                 {match[0]}
                             </LinkText>
                         );
@@ -98,15 +104,15 @@ function DialogueContainer({ text, onComplete }: DialogueContainerProps) {
         }
 
         return result;
-    }, [text]);
+    }, [text, canRespond]);
 
     return (
         <>{!modalVisible ? (
-            <FadeInText delay={delay} paragraphDelay={lineDelay} gradual={gradual} onComplete={onComplete}>
+            <FadeInText delay={delay} paragraphDelay={lineDelay} gradual={gradual} onComplete={handleComplete}>
                 {textParsedForKeywords}
             </FadeInText>           
       ) : (
-        <FadeInText delay={delay} paragraphDelay={lineDelay} gradual={gradual} onComplete={onComplete}>{linkText}</FadeInText>
+        <FadeInText delay={delay} paragraphDelay={lineDelay} gradual={gradual} onComplete={handleComplete}>{linkText}</FadeInText>
       )}</>
     )
 }

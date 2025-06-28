@@ -1,6 +1,7 @@
 const InfoDatabase = {
     "link": "Test string for the link test component. This string is pulled from the hardcoded info database.",
-    "iron wardens": "The Iron Wardens believe that arcane magic is an inherently corrupting force, they ruthlessly hunt and control mages within the Inheritor Kingdoms, ensuring that the atrocities of the Attanian Empire will never be repeated."
+    "iron wardens": "The Iron Wardens believe that arcane magic is an inherently corrupting force, they ruthlessly hunt and control mages within the Inheritor Kingdoms, ensuring that the atrocities of the Attanian Empire will never be repeated.",
+    "keyword": "Hey look a keyword! You clicked on this for more information and I'm giving you nothing, bet you feel silly now cowboy."
 } as const;
 
 type ValidKeyword = keyof typeof InfoDatabase;

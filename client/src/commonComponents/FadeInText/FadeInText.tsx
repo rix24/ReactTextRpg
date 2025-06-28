@@ -18,7 +18,7 @@ function FadeInText({
   onComplete,
 }: FadeInTextProps) {
   const [visibleLines, setVisibleLines] = useState<number[]>([]);
-  const finalLineDelay = 3000;
+  const finalLineDelay = 1000;
 
   const parseContentIntoLines = (): React.ReactNode[] => {
     const lines: React.ReactNode[] = [];

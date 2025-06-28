@@ -4,6 +4,10 @@ import ResponseContainer from "../ResponseContainer/ResponseContainer";
 import Styles from './Styling/SceneContainerStyles.module.css'
 
 function SceneContainer() {
+    //ToDo: add a function to retrieve the text and response options for the current scene, initially this will likely be a function call to a hardcoded storage in the frontend
+    // but in the future this will likely be a call to a backend API that retrieves the text and response options for the current scene
+    // it should also contain functions for selecting the next scene based on the appropriate linked scenes and the players choices 
+    //then transition the scene and re render the component with the new scene text and response options
     const handleResponseClick = (index: number) => {
         console.log(index);
     }
