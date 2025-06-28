@@ -8,7 +8,7 @@ function MainGameContentContainer() {
   return (
     <div className={Styles.gameBorder}>
       <h1 className={Styles.titleTextCenter}>Main Game Placeholder</h1>
-        <SceneContainer />
+      <SceneContainer />
     </div>
   );
 }

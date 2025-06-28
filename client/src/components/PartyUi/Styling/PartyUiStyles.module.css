@@ -1,0 +1,17 @@
+.partyTopCardBorder {
+    border: solid 1px rgba(255, 255, 255, 0.8);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    width: 100%;
+}
+
+.partyMiddleCardBorder {
+    border: solid 1px rgba(255, 255, 255, 0.8);
+}
+
+.partyBottomCardBorder {
+    border: solid 1px rgba(255, 255, 255, 0.8);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
