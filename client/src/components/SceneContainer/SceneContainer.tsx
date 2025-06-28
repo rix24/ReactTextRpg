@@ -24,7 +24,7 @@ function SceneContainer() {
         <>
             <div className={Styles.sceneContainer}>
                 <div className={Styles.partyUiBorder}>
-                    <PartyUi />
+                    <PartyUi partySize={4}/>
                 </div>
                 <div className={Styles.dialogueContainer}>
                     <DialogueContainer onComplete={textFadeInComplete} text={`Welcome to the main game! This is a placeholder piece of text, that is also testing the new implementation of the link text and fade in text components. This is a test of the link text component, which should be clickable and show a modal with more information.
