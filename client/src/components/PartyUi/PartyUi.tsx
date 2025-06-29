@@ -1,21 +1,25 @@
 import Styles from './Styling/PartyUiStyles.module.css';
+import PartyMemberCard from './PartyMemberCard'
+import type { PartyMember } from '../../types/PartyMember';
 
 interface PartyUiProps {
-    partySize: number;
+    partyMembers: PartyMember[]; // Assuming PartyMember is defined elsewhere
 }
 
-function PartyUi({ partySize }: PartyUiProps) {
-    const partyCards = [];
+function PartyUi({ partyMembers }: PartyUiProps) {
     
-    for (let i = 0; i < partySize; i++) {
-        partyCards.push(
-            <div 
-                key={i}
-                className={i === 3 ? "bottom-card" : Styles.partyCardBorder} 
-                style={{ height: "25%" }}
-            />
-        );
-    }
+    
+
+
+    const partyCards = partyMembers.map((member, index) => (
+        <div 
+            key={member.id}
+            className={index === 3 ? "bottom-card" : Styles.partyCardBorder} 
+            style={{ height: "25%" }}
+        >
+            <PartyMemberCard character={member} />
+        </div>
+    ));
     
     return (        
         <>

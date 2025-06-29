@@ -1,15 +1,18 @@
-.responseContainer {
-    margin: 5px;
-    margin-top: auto;    
+.responseContainerOuter {
+    margin: 7px;
+    margin-top: auto;
     border: solid 1px rgba(255, 255, 255, 1);
-    border-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
     height: 170px;
+    overflow: hidden;
+}
+
+.responseContainer {
+    height: 100%;
     padding: 0 8px 0 0;
     overflow: hidden;
-
     opacity: 0;
-    
-
     transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
 }
 
@@ -19,8 +22,7 @@
 }
 
 .fadeOut {
-    opacity: 0;
-    
+    opacity: 0;    
 }
 
 .responseContainerInner {
@@ -35,7 +37,7 @@
 .responseFirstOption {
     margin-left: 10px;
     margin-right: 5px;
-    margin-top: 10px;
+    margin-top: 5px;
     font-size: 20px;
 }
 

@@ -43,11 +43,13 @@ function ResponseContainer({ responses, onClick, canRespond }: ResponseContainer
 
     return (
         <>
-            <div className={`${Styles.responseContainer} ${isVisible ? Styles.fadeIn : Styles.fadeOut}`}>
-                <div className={Styles.responseContainerInner}>
-                    {responseElements}
-                </div>
-            </div>           
+            <div className={Styles.responseContainerOuter}>
+                <div className={`${Styles.responseContainer} ${isVisible ? Styles.fadeIn : Styles.fadeOut}`}>
+                    <div className={Styles.responseContainerInner}>
+                        {responseElements}
+                    </div>
+                </div>     
+            </div>          
         </>
     );
 
