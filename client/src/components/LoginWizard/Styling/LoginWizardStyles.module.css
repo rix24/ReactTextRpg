@@ -1,7 +1,7 @@
 .contentBorder {
     width: 70%;
     height: 300px;
-    border: solid 1px rgba(255, 255, 255, 0.8);
+    border: solid 1px rgba(255, 255, 255, 1);
     border-radius: 20px;
     margin-left: 15%;
     margin-right: 15%;
@@ -82,4 +82,12 @@
     text-decoration: underline;
     text-align: center;
     font-size: 12px;
+}
+
+.errorContainer {
+    text-align: center;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 30%;
+    display: flex;
 }

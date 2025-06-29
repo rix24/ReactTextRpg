@@ -7,9 +7,11 @@ import Styles from "./Styling/LoginWizardStyles.module.css";
 interface LoginWizardRegisterStepProps {
   //will need to return actal login data at some point
   onRegister: (registerData: RegisterData) => Promise<void>;
+  error: string;
+  onClearError: () => void;
 }
 
-function LoginWizardRegisterStep({ onRegister }: LoginWizardRegisterStepProps) {
+function LoginWizardRegisterStep({ onRegister, error, onClearError }: LoginWizardRegisterStepProps) {
   const { previousStep, handleStep } = useWizard();
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [registerData, setRegisterData] = useState<RegisterData>({
@@ -19,8 +21,13 @@ function LoginWizardRegisterStep({ onRegister }: LoginWizardRegisterStepProps) {
   });
 
   handleStep(() => {
-    console.log("Step change");
+    
   });
+
+  const loginStep = () => {
+    onClearError();
+    previousStep();
+  };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -104,9 +111,12 @@ function LoginWizardRegisterStep({ onRegister }: LoginWizardRegisterStepProps) {
         {errors.email && (
           <span className={Styles.errorText}>{errors.email}</span>
         )}
+        {error !== "" && (
+          <span className={Styles.errorText}>{error}</span>
+        )}
       </div>
       <div className={Styles.twoButtonContainer}>
-        <button onClick={previousStep} className={Styles.loginButton}>
+        <button onClick={loginStep} className={Styles.loginButton}>
           Back
         </button>
         <button onClick={handleSubmit} className={Styles.loginButton}>

@@ -1,0 +1,29 @@
+.sceneContainer{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 10px;
+    gap: 5px;
+    justify-content: center;
+}
+
+.dialogueContainer {
+    width: 77%;
+    border: solid 1px rgba(255, 255, 255, 1);
+    height: 100%;
+}
+
+.partyUiBorderLeft {
+    border: solid 1px rgba(255, 255, 255, 1);
+    border-top-left-radius: 20px;
+    width: 10%;
+    height: 100%;    
+}
+
+.partyUiBorderRight {
+    border: solid 1px rgba(255, 255, 255, 1);
+    border-top-right-radius: 20px;
+    width: 10%;
+    height: 100%;
+}

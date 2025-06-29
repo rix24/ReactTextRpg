@@ -27,7 +27,7 @@ namespace ReactTextRpgApi.Controllers{
             }
 
             // Placeholder logic - replace with actual authentication
-            if (request.Username == "a" && request.Password == "a")
+            if (request.Username == "admin" && request.Password == "password")
             {
                 return Ok(new { 
                     message = "Login successful", 

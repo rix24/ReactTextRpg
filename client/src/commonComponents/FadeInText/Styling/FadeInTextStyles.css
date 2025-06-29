@@ -2,9 +2,22 @@
     opacity: 0;
     transition: opacity 2s ease-in-out;
     text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .fade-in-text-line.visible {
     opacity: 1;
+}
+
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
     text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.fade-in.visible {
+    opacity: 1;
 }

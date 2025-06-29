@@ -5,10 +5,15 @@ import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { LoginData, RegisterData } from "./LoginWizardInterfaces";
 import { API_BASE_URL } from "../../config/api";
+import Styles from './Styling/LoginWizardStyles.module.css'
 
 function LoginWizard() {
   const navigate = useNavigate();
   const [error, setError] = useState<string>("");
+
+  const loginErrorMessage = "Login failed. Please check your credentials and try again.";
+  const registerErrorMessage = "Registration failed. Please try again.";
+
   const HandleLogin = useCallback(
     async (loginData: LoginData) => {
       try {
@@ -21,14 +26,17 @@ function LoginWizard() {
         });
 
         if (!response.ok) {
+          setError(loginErrorMessage);
           throw new Error("Login failed");
         }
 
         const result = await response.json();
-        console.log("Login successful:", result);
+        if (!result.success) {
+          throw new Error(result.message || "Login failed");
+        }
         navigate("/ReactTextRpg/Game");
       } catch (error) {
-        setError("Login failed. Please check your credentials and try again.");
+        setError(loginErrorMessage);
         console.error("Login error:", error);
         // Handle login error (e.g., show an error message to the user)
       }
@@ -36,10 +44,13 @@ function LoginWizard() {
     [navigate]
   );
 
+  const clearError = useCallback(() => {
+    setError("");
+  }, []);
+  
+
   const HandleRegister = useCallback(
     async (registerData: RegisterData) => {
-      console.log("Register button clicked");
-
       try {
         const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
           method: "POST",
@@ -50,14 +61,18 @@ function LoginWizard() {
         });
 
         if (!response.ok) {
+          setError(registerErrorMessage);
           throw new Error("Registration failed");
         }
 
         const result = await response.json();
-        console.log("Registration successful:", result);
+        if (!result.success) {
+          setError(registerErrorMessage);
+          throw new Error(result.message || "Registration failed");
+        }
         // Reset the form to the login page or show a success message, whatever needs to be done here
       } catch (error) {
-        setError("Registration failed. Please try again.");
+        setError(registerErrorMessage);
       }
       // Placeholder for actual registration logic
     },
@@ -65,7 +80,7 @@ function LoginWizard() {
   );
 
   const HandleForgotPassword = useCallback(() => {
-    console.log("Forgot Password button clicked");
+    console.log("Forgot password button clicked");
     // Placeholder for actual forgot password logic
   }, []);
 
@@ -75,9 +90,11 @@ function LoginWizard() {
         <LoginWizardLoginStep
           onLogin={HandleLogin}
           onForgotPassword={HandleForgotPassword}
+          error={error}
+          onClearError={clearError}
         />
-        <LoginWizardRegisterStep onRegister={HandleRegister} />
-      </Wizard>
+        <LoginWizardRegisterStep onRegister={HandleRegister} error={error} onClearError={clearError}/>
+      </Wizard>  
     </>
   );
 }

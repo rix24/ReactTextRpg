@@ -1,0 +1,58 @@
+.responseContainerOuter {
+    margin: 7px;
+    margin-top: auto;
+    border: solid 1px rgba(255, 255, 255, 1);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 170px;
+    overflow: hidden;
+}
+
+.responseContainer {
+    height: 100%;
+    padding: 0 8px 0 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+.fadeIn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fadeOut {
+    opacity: 0;    
+}
+
+.responseContainerInner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: rgba(255, 255, 255, 0.8) transparent;
+}
+
+.responseFirstOption {
+    margin-left: 10px;
+    margin-right: 5px;
+    margin-top: 5px;
+    font-size: 20px;
+}
+
+.responseFirstOption:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.responseOption {
+    margin-left: 10px;
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+.responseOption:hover {
+    cursor: pointer;
+    color: white;
+}
