@@ -1,7 +1,7 @@
 import type { BaseCharacter } from './BaseCharacter';
 
 interface Enemy extends BaseCharacter {
-    challenge: string;
+    challenge: number;
     experienceGranted: number;
     loot?: string[];
 }

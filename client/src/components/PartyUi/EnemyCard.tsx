@@ -1,20 +1,19 @@
 import Styles from './Styling/characterCardStyles.module.css';
-import type { PartyMember } from '../../types/PartyMember';
+import type { Enemy } from '../../types/Enemy';
 
-interface PartyMemberCardProps {
-    character: PartyMember;
+interface EnemyCardProps {
+    enemy: Enemy;
 }
 
-function PartyMemberCard ({ character }: PartyMemberCardProps) {
-    const healthPercentage = (character.health.current / character.health.max) * 100;
-    const manaPercentage = character.mana 
-        ? (character.mana.current / character.mana.max) * 100 
+function EnemyCard({ enemy }: EnemyCardProps) {
+    const healthPercentage = (enemy.health.current / enemy.health.max) * 100;
+    const manaPercentage = enemy.mana 
+        ? (enemy.mana.current / enemy.mana.max) * 100 
         : 0;
     return (
-        <div className={Styles.partyMemberCardContainer}>
-            <span className={Styles.characterName}>{character.name}</span>
-            <img className={Styles.characterPortrait} src={character.portrait} alt={`${character.name}'s portrait`} />
-            <span className={Styles.smallText}>{character.class}</span>
+        <div className={Styles.enemyCardContainer}>
+            <span className={Styles.enemyname}>{enemy.name}</span>
+            <img className={Styles.characterPortrait} src={enemy.portrait} alt={`${enemy.name}'s portrait`} />
 
             {/* Health Bar */}
             <div className={Styles.statBar}>
@@ -24,13 +23,13 @@ function PartyMemberCard ({ character }: PartyMemberCardProps) {
                         style={{ width: `${healthPercentage}%` }}
                     />
                     <span className={Styles.statText}>
-                        {character.health.current}/{character.health.max}
+                        {enemy.health.current}/{enemy.health.max}
                     </span>
                 </div>
             </div>
 
             {/* Mana Bar */}
-            {character.mana && (
+            {enemy.mana && (
                 <div className={Styles.statBar}>
                     <div className={Styles.manaBar}>
                         <div 
@@ -38,14 +37,14 @@ function PartyMemberCard ({ character }: PartyMemberCardProps) {
                             style={{ width: `${manaPercentage}%` }}
                         />
                         <span className={Styles.statText}>
-                            {character.mana.current}/{character.mana.max}
+                            {enemy.mana.current}/{enemy.mana.max}
                         </span>
                     </div>
                 </div>
             )}
-            <span className={Styles.smallText}>{character.tempDistance}</span>
+            <span className={Styles.smallText}>{enemy.tempDistance}</span>
         </div>
     )
-}
+};
 
-export default PartyMemberCard;
+export default EnemyCard;

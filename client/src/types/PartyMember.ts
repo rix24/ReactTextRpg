@@ -12,8 +12,7 @@ interface PartyMember extends BaseCharacter {
     level: number;
     experience: number;
     class: string;
-    weapon: Weapon;
-    portrait: string;
+    weapon: Weapon;   
 }
 
 interface Weapon {
