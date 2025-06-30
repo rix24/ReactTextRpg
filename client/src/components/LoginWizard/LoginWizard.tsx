@@ -5,13 +5,13 @@ import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { LoginData, RegisterData } from "./LoginWizardInterfaces";
 import { API_BASE_URL } from "../../config/api";
-import Styles from './Styling/LoginWizardStyles.module.css'
 
 function LoginWizard() {
   const navigate = useNavigate();
   const [error, setError] = useState<string>("");
 
-  const loginErrorMessage = "Login failed. Please check your credentials and try again.";
+  const loginErrorMessage =
+    "Login failed. Please check your credentials and try again.";
   const registerErrorMessage = "Registration failed. Please try again.";
 
   const HandleLogin = useCallback(
@@ -31,14 +31,13 @@ function LoginWizard() {
         }
 
         const result = await response.json();
-        if (!result.success) {
-          throw new Error(result.message || "Login failed");
-        }
+        console.log("Login successful:", result); // This will show your actual response structure
+
+        // Remove the success check since your API doesn't include it
         navigate("/ReactTextRpg/Game");
       } catch (error) {
-        setError(loginErrorMessage);
+        setError("test");
         console.error("Login error:", error);
-        // Handle login error (e.g., show an error message to the user)
       }
     },
     [navigate]
@@ -47,7 +46,6 @@ function LoginWizard() {
   const clearError = useCallback(() => {
     setError("");
   }, []);
-  
 
   const HandleRegister = useCallback(
     async (registerData: RegisterData) => {
@@ -93,8 +91,12 @@ function LoginWizard() {
           error={error}
           onClearError={clearError}
         />
-        <LoginWizardRegisterStep onRegister={HandleRegister} error={error} onClearError={clearError}/>
-      </Wizard>  
+        <LoginWizardRegisterStep
+          onRegister={HandleRegister}
+          error={error}
+          onClearError={clearError}
+        />
+      </Wizard>
     </>
   );
 }

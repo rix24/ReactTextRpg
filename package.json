@@ -10,7 +10,8 @@
     "install-client": "cd client && npm install",
     "build-client": "cd client && npm run build",
     "build-server": "cd server && dotnet build",
-    "setup": "npm run install-client && cd server && dotnet restore"
+    "setup": "npm run install-client && cd server && dotnet restore",
+    "deploy": "cd client && npm run deploy"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

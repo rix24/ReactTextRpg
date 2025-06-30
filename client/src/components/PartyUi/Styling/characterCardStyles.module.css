@@ -24,12 +24,13 @@
     width: 100%;
     gap: 2px;
     justify-content: center;
+    padding-top: 2px;
 }
 
 .healthBar,
 .manaBar {
-    position: relative; /* Enable absolute positioning for children */    
-    height: 7px; /* Make bars taller to accommodate text */
+    position: relative; 
+    height: 12px; 
     background-color: #333;
     border: 1px solid #666;
     border-radius: 4px;
@@ -49,6 +50,8 @@
     background-color: #e74c3c; /* Red */
     transition: width 0.3s ease;
     z-index: 1;
+    align-items: center;
+    justify-content: center;
 }
 
 .manaFill {
@@ -59,10 +62,11 @@
     background-color: #3498db; /* Blue */
     transition: width 0.3s ease;
     z-index: 1;
+    align-items: center;
+    justify-content: center;
 }
 
 .statText {
-    position: relative;
     z-index: 2; /* Ensure text appears above the fill */
     font-size: 12px;
     color: white;
