@@ -18,5 +18,8 @@
   },
   "workspaces": [
     "client"
-  ]
+  ],
+  "dependencies": {
+    "zustand": "^5.0.6"
+  }
 }

@@ -1,5 +1,5 @@
 import Styles from "./Styling/characterCardStyles.module.css";
-import type { PartyMember } from "../../types/PartyMember";
+import type { PartyMember } from "../../data/types/PartyMember";
 
 interface PartyMemberCardProps {
   character: PartyMember;
@@ -48,7 +48,7 @@ function PartyMemberCard({ character }: PartyMemberCardProps) {
           </div>
         </div>
       )}
-      <span className={Styles.smallText}>{character.tempDistance}</span>
+      <span className={Styles.smallText}>{"Distance: "}</span>
     </div>
   );
 }

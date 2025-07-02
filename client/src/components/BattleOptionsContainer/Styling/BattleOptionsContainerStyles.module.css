@@ -1,0 +1,34 @@
+.battleOptionsContainerOuter {
+    margin: 7px;
+    margin-top: auto;
+    border: solid 1px rgba(255, 255, 255, 1);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 170px;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 10px;
+    /* Add scrollbar styling to match ResponseContainer */
+    scrollbar-color: rgba(255, 255, 255, 0.8) transparent;
+    scrollbar-width: thin; /* Makes scrollbar thinner in Firefox */
+}
+
+.battleOptionsText {
+    font-size: 30px;
+    min-width: 120px;
+    width: auto;
+    text-align: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.battleOptionsText:hover {
+    cursor: pointer;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    transition: text-shadow 0.2s ease;
+}

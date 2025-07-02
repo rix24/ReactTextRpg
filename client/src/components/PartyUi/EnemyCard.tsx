@@ -1,5 +1,5 @@
 import Styles from "./Styling/characterCardStyles.module.css";
-import type { Enemy } from "../../types/Enemy";
+import type { Enemy } from "../../data/types/Enemy";
 
 interface EnemyCardProps {
   enemy: Enemy;
@@ -46,7 +46,7 @@ function EnemyCard({ enemy }: EnemyCardProps) {
           </div>
         </div>
       )}
-      <span className={Styles.smallText}>{enemy.tempDistance}</span>
+      <span className={Styles.smallText}>Distance:</span>
     </div>
   );
 }
