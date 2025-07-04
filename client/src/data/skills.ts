@@ -1,4 +1,4 @@
-import type { Skill, StatType } from './types/abilities';
+import type { Skill } from './types/abilities';
 
 export const WARRIOR_SKILLS: Record<string, Skill> = {
     Cleave: {id: "cleaveSkill", name: "Cleave", description: "A powerful swing that hits multiple enemies in front of you.", cooldown: 3, perEncounter: false, statScaling: ["strength", "dexterity"], targets: "enemies", targetCount: 4, targetType: "all"},

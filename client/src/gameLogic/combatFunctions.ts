@@ -1,5 +1,4 @@
 import type { PartyMember } from '../data/types/PartyMember';
-import type { Enemy } from '../data/types/Enemy';
 import type { Skill, Spell } from '../data/types/abilities';
 import { useGameStore } from '../store/gameStore';
 import { useCallback } from 'react';
@@ -24,7 +23,9 @@ export const useCombat = () => {
     const { updateEnemy, updatePartyMember } = useGameStore();
 
     const executeAbility = useCallback((ability: Skill | Spell, caster: PartyMember, targetIds?: string[]): CombatResult => {
+        console.log(targetIds);
         const { activeEnemies, activePartyMembers, activePartyMember } = useGameStore.getState();
+        console.log(activePartyMembers, activeEnemies, activePartyMember);
 
         if (ability.targets === "enemy" && activeEnemies.length > 0) {
 

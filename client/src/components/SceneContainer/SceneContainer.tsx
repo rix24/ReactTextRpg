@@ -1,10 +1,9 @@
-import { act, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import DialogueContainer from "../DialogueContainer/DialogueContainer";
 import ResponseContainer from "../ResponseContainer/ResponseContainer";
 import Styles from "./Styling/SceneContainerStyles.module.css";
 import PartyUi from "../PartyUi/PartyUi";
 import type { PartyMember } from "../../data/types/PartyMember";
-import type { Enemy } from "../../data/types/Enemy";
 import { useGameStore } from "../../store/gameStore";
 
 import BattleOptionsContainer from "../BattleOptionsContainer/BattleOptionsContainer";

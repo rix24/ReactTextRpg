@@ -1,6 +1,5 @@
 import type { PartyMember } from "../../data/types/PartyMember";
 import Styles from "./Styling/BattleOptionsContainerStyles.module.css";
-import { useState } from "react";
 
 interface BattleOptionsContainerProps {
   options: string[];
@@ -13,6 +12,7 @@ function BattleOptionsContainer({
   activePartyMember,
   onOptionSelect,
 }: BattleOptionsContainerProps) {
+  console.log(activePartyMember);
   const handleClick = (option: string) => {
     onOptionSelect(option);
   };

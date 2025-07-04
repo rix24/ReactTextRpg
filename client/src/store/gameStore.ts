@@ -34,7 +34,7 @@ interface GameState {
   setMartialBattleMenu: () => void,
 }
 
-export const useGameStore = create<GameState>((set, get) => ({
+export const useGameStore = create<GameState>((set) => ({
   // Initial state
   activePartyMembers: [],
   activePartyMember: null,
